@@ -6,7 +6,7 @@
 //  Copyright © 2018 NoNameDude. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class TranslateAPI {
     enum Language: String {
@@ -20,9 +20,33 @@ class TranslateAPI {
                 return .first
             }
         }
+        
+        var color: UIColor {
+            if self == .first {
+                return UIColor(red: 0.93, green: 0.3, blue: 0.36, alpha: 1)
+            } else {
+                return UIColor(red: 0, green: 0.49, blue: 0.91, alpha: 1)
+            }
+        }
+        
+        var title: String {
+            if self == .first {
+                return "Русский"
+            } else {
+                return "Английский"
+            }
+        }
+        
+        var locale: Locale {
+            if self == .first {
+                return Locale.init(identifier: "ru_RU")
+            } else {
+                return Locale.init(identifier: "en-US")
+            }
+        }
     }
     
-    static func recogniseLanguage(text: String, completion: ((Language?)->Void)?) {
+    static func recogniseLanguage(text: String, completion: @escaping (Language?)->()) {
         let url = "https://translate.yandex.net/api/v1.5/tr.json/detect"
         var request = URLRequest(url: URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
         request.httpMethod = "POST"
@@ -45,7 +69,7 @@ class TranslateAPI {
                 switch (code) {
                 case 200:
                     DispatchQueue.main.async {
-                        completion?(Language(rawValue: lang))
+                        completion(Language(rawValue: lang))
                     }
                     break
                 default:
@@ -57,16 +81,12 @@ class TranslateAPI {
         }.resume()
     }
     
-    static func translateText(_ text: String, completion: ((String?, Language?, Language?)->Void)?) {
+    static func translateText(_ text: String, from: Language, completion: @escaping (String?, Language?, Language?)->()) {
         recogniseLanguage(text: text) { (fromLang) in
-            let toLang = fromLang?.opposit
+            let fromLang = fromLang ?? from
+            let toLang = fromLang.opposit
             
-            var lang: String = ""
-            if let toLang = toLang {
-                lang = "\(toLang.opposit.rawValue)-\(toLang.rawValue)"
-            } else {
-                lang = Language.first.rawValue
-            }
+            let lang = "\(fromLang.rawValue)-\(toLang.rawValue)"
             let url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
             var request = URLRequest(url: URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
             request.httpMethod = "POST"
@@ -90,7 +110,7 @@ class TranslateAPI {
                     switch (code) {
                     case 200:
                         DispatchQueue.main.async {
-                            completion?(text.first, fromLang, toLang)
+                            completion(text.first, fromLang, toLang)
                         }
                         break
                     default:

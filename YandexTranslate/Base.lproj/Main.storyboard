@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="YandexSansText-Medium.ttf">
+            <string>YandexSansText-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Translate View Controller-->
         <scene sceneID="Gs0-WH-9qU">
@@ -40,13 +45,13 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH6-ER-Aww">
                                                             <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" name="YandexSansText-Medium" family="Yandex Sans Text" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znK-Rc-8Ol">
                                                             <rect key="frame" x="0.0" y="16" width="319" height="43"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="YandexSansText-Medium" family="Yandex Sans Text" pointSize="20"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -81,7 +86,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FdO-XP-YP0">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Header" id="FdO-XP-YP0">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
@@ -92,78 +97,87 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="Jap-2S-tIn"/>
                     <connections>
-                        <outlet property="textField" destination="jsM-c3-SWK" id="ufQ-7V-6o7"/>
-                        <outlet property="textFieldViewHolder" destination="imq-xR-lon" id="6cs-Td-oDJ"/>
+                        <outlet property="translationInputView" destination="imq-xR-lon" id="aag-Wd-9jL"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzX-mI-dCM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="imq-xR-lon">
+                <view contentMode="scaleToFill" id="imq-xR-lon" customClass="TranslateInputView" customModule="YandexTranslate" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbU-h5-dny">
                             <rect key="frame" x="4" y="16" width="232" height="44"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LangShape" translatesAutoresizingMaskIntoConstraints="NO" id="R0c-Ef-unZ">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvz-8H-Jpq">
                                     <rect key="frame" x="4" y="4" width="46" height="36"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LangShape" translatesAutoresizingMaskIntoConstraints="NO" id="R0c-Ef-unZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="46" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="kPM-wC-I2x"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rus" translatesAutoresizingMaskIntoConstraints="NO" id="dov-j2-gO3">
+                                            <rect key="frame" x="12" y="2" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Eng" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-JU-iCP">
+                                            <rect key="frame" x="2" y="2" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.zPosition">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                    </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="46" id="kPM-wC-I2x"/>
+                                        <constraint firstAttribute="trailing" secondItem="R0c-Ef-unZ" secondAttribute="trailing" id="2qX-lp-GT3"/>
+                                        <constraint firstItem="R0c-Ef-unZ" firstAttribute="leading" secondItem="bvz-8H-Jpq" secondAttribute="leading" id="5wH-uy-85i"/>
+                                        <constraint firstAttribute="bottom" secondItem="R0c-Ef-unZ" secondAttribute="bottom" id="E7L-cs-wCA"/>
+                                        <constraint firstAttribute="width" constant="46" id="PkL-X6-GEf"/>
+                                        <constraint firstItem="R0c-Ef-unZ" firstAttribute="top" secondItem="bvz-8H-Jpq" secondAttribute="top" id="scV-fk-6NS"/>
                                     </constraints>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rus" translatesAutoresizingMaskIntoConstraints="NO" id="dov-j2-gO3">
-                                    <rect key="frame" x="16" y="6" width="32" height="32"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="32" id="JL0-BV-UR9"/>
-                                    </constraints>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Eng" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-JU-iCP">
-                                    <rect key="frame" x="6" y="6" width="32" height="32"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="32" id="Wwq-DJ-fn3"/>
-                                    </constraints>
-                                </imageView>
+                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djq-pI-SrD">
                                     <rect key="frame" x="188" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Mth-Yf-FDs"/>
                                         <constraint firstAttribute="width" constant="44" id="V5n-fV-gwJ"/>
                                     </constraints>
-                                    <state key="normal" image="Send"/>
+                                    <state key="normal" image="Mic"/>
                                     <connections>
-                                        <action selector="sendButtonAction:" destination="bj7-tT-eQ2" eventType="touchUpInside" id="Mnv-7K-QjF"/>
+                                        <action selector="sendAction:" destination="imq-xR-lon" eventType="touchUpInside" id="YJe-DO-F0L"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите текст/Input text" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jsM-c3-SWK">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Английский" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jsM-c3-SWK">
                                     <rect key="frame" x="56" y="7" width="126" height="30"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="YandexSansText-Medium" family="Yandex Sans Text" pointSize="17"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                             <color key="value" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="textFieldEdited:" destination="imq-xR-lon" eventType="editingChanged" id="T6V-7P-dtF"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="3Tb-KT-YeN"/>
-                                <constraint firstItem="R0c-Ef-unZ" firstAttribute="leading" secondItem="fbU-h5-dny" secondAttribute="leading" constant="4" id="4De-8V-0Xo"/>
-                                <constraint firstItem="Uma-JU-iCP" firstAttribute="leading" secondItem="fbU-h5-dny" secondAttribute="leading" constant="6" id="5hJ-lP-VgG"/>
-                                <constraint firstAttribute="bottom" secondItem="Uma-JU-iCP" secondAttribute="bottom" constant="6" id="8co-0j-jJa"/>
                                 <constraint firstAttribute="trailing" secondItem="Djq-pI-SrD" secondAttribute="trailing" id="DlG-ZU-8Xc"/>
-                                <constraint firstItem="R0c-Ef-unZ" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" constant="4" id="J2x-hO-Nxk"/>
                                 <constraint firstItem="jsM-c3-SWK" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" constant="7" id="KeU-Vz-64s"/>
                                 <constraint firstAttribute="bottom" secondItem="Djq-pI-SrD" secondAttribute="bottom" id="LBu-t5-JSf"/>
                                 <constraint firstAttribute="bottom" secondItem="jsM-c3-SWK" secondAttribute="bottom" constant="7" id="Szh-f1-kGE"/>
-                                <constraint firstItem="jsM-c3-SWK" firstAttribute="leading" secondItem="R0c-Ef-unZ" secondAttribute="trailing" constant="6" id="VWP-XS-Gx9"/>
+                                <constraint firstItem="jsM-c3-SWK" firstAttribute="leading" secondItem="bvz-8H-Jpq" secondAttribute="trailing" constant="6" id="TKX-6d-KL0"/>
                                 <constraint firstItem="Djq-pI-SrD" firstAttribute="leading" secondItem="jsM-c3-SWK" secondAttribute="trailing" constant="6" id="VxQ-hc-Pal"/>
-                                <constraint firstItem="Uma-JU-iCP" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" constant="6" id="Yvy-tU-1VE"/>
-                                <constraint firstAttribute="bottom" secondItem="dov-j2-gO3" secondAttribute="bottom" constant="6" id="eUo-KA-D6d"/>
-                                <constraint firstItem="dov-j2-gO3" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" constant="6" id="eci-yb-E7d"/>
-                                <constraint firstAttribute="bottom" secondItem="R0c-Ef-unZ" secondAttribute="bottom" constant="4" id="mgo-tX-vWb"/>
-                                <constraint firstItem="dov-j2-gO3" firstAttribute="leading" secondItem="fbU-h5-dny" secondAttribute="leading" constant="16" id="oTy-bb-WgE"/>
+                                <constraint firstAttribute="bottom" secondItem="bvz-8H-Jpq" secondAttribute="bottom" constant="4" id="cKT-tj-hzd"/>
+                                <constraint firstItem="bvz-8H-Jpq" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" constant="4" id="kGp-fE-y1n"/>
                                 <constraint firstItem="Djq-pI-SrD" firstAttribute="top" secondItem="fbU-h5-dny" secondAttribute="top" id="sp8-1Y-9jf"/>
+                                <constraint firstItem="bvz-8H-Jpq" firstAttribute="leading" secondItem="fbU-h5-dny" secondAttribute="leading" constant="4" id="tFa-9E-lGf"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -180,6 +194,14 @@
                         <constraint firstItem="Tfn-cZ-RFC" firstAttribute="bottom" secondItem="fbU-h5-dny" secondAttribute="bottom" constant="16" id="nMk-w5-ut9"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="Tfn-cZ-RFC"/>
+                    <connections>
+                        <outlet property="background" destination="fbU-h5-dny" id="pxl-G4-gSG"/>
+                        <outlet property="languageSwitcher" destination="bvz-8H-Jpq" id="Xxv-gz-scr"/>
+                        <outlet property="mainFlag" destination="Uma-JU-iCP" id="4aa-7K-hEG"/>
+                        <outlet property="secondaryFlag" destination="dov-j2-gO3" id="JWl-pe-fHs"/>
+                        <outlet property="sendButton" destination="Djq-pI-SrD" id="UCt-RY-0Bt"/>
+                        <outlet property="textField" destination="jsM-c3-SWK" id="Hjw-p8-nBo"/>
+                    </connections>
                 </view>
             </objects>
             <point key="canvasLocation" x="1060" y="133"/>
@@ -206,7 +228,7 @@
     <resources>
         <image name="Eng" width="32" height="32"/>
         <image name="LangShape" width="46" height="36"/>
+        <image name="Mic" width="12" height="16"/>
         <image name="Rus" width="32" height="32"/>
-        <image name="Send" width="16" height="17"/>
     </resources>
 </document>

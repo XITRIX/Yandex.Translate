@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class TranslatePresenter: TranslateViewPresenter {
     let view: TranslateView
     var translations: [MessageViewModel] = []
@@ -25,12 +24,13 @@ class TranslatePresenter: TranslateViewPresenter {
     }
     
     
-    func translate(text: String) {
-        TranslateAPI.translateText(text, completion: { [weak self] (res, from, to) in
+    func translate(text: String, from: TranslateAPI.Language, completion: ((TranslateAPI.Language?)->())? = nil) {
+        TranslateAPI.translateText(text, from: from, completion: { [weak self] (res, from, to) in
             if let self = self,
                 let res = res {
                 self.translations.insert(MessageViewModel(isLeft: from != TranslateAPI.Language.first, title: text, message: res), at: 0)
                 self.view.handleCollectionUpdate()
+                completion?(from)
             }
         })
     }
@@ -40,5 +40,5 @@ protocol TranslateViewPresenter {
     init(view: TranslateView)
     var translationsCount: Int { get }
     func getTranslation(at: Int) -> MessageViewModel
-    func translate(text: String)
+    func translate(text: String, from: TranslateAPI.Language, completion: ((TranslateAPI.Language?)->())?)
 }

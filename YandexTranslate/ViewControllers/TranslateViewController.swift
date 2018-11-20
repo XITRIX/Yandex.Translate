@@ -9,13 +9,12 @@
 import UIKit
 
 class TranslateViewController : UICollectionViewController, TranslateView {
-    @IBOutlet var textFieldViewHolder: UIView!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet var translationInputView: TranslateInputView!
     
     var presenter: TranslateViewPresenter!
     
     override var inputAccessoryView: UIView? {
-        return textFieldViewHolder
+        return translationInputView
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -26,6 +25,7 @@ class TranslateViewController : UICollectionViewController, TranslateView {
         super.viewDidLoad()
         presenter = TranslatePresenter(view: self)
         
+        translationInputView.delegate = self
         collectionView.setCollectionViewLayout(RevercedCollectionViewFlowLayout(), animated: false)
         navigationItem.titleView = UIImageView(image: UIImage(named: "YandexTitle"))
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -34,18 +34,10 @@ class TranslateViewController : UICollectionViewController, TranslateView {
     @objc func keyboardDidShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            if (keyboardRectangle.height != textFieldViewHolder.frame.height),
+            if (keyboardRectangle.height != translationInputView.frame.height),
                 presenter.translationsCount > 0 {
                 collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
             }
-        }
-    }
-    
-    @IBAction func sendButtonAction(_ sender: Any) {
-        if let text = textField.text,
-            !text.isEmpty {
-            presenter.translate(text: text)
-            textField.text = ""
         }
     }
     
@@ -74,6 +66,14 @@ extension TranslateViewController: UICollectionViewDelegateFlowLayout {
             cell.setupConstraints(collectionViewWidth: view.frame.width)
         }
         return presenter.getTranslation(at: indexPath.row).calculateCellSize(collectionViewWidth: view.frame.width)
+    }
+}
+
+extension TranslateViewController: TranslateInputViewDelegate {
+    func translate(_ text: String, completion: ((TranslateAPI.Language?) -> Void)?) {
+        presenter.translate(text: text, from: translationInputView.primaryLanguage) { fromLang in
+            completion?(fromLang)
+        }
     }
 }
 

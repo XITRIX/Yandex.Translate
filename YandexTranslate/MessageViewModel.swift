@@ -22,22 +22,22 @@ struct MessageViewModel {
     }
 	
 	func calculateCellSize(collectionViewWidth: CGFloat) -> CGSize {
-        let size = calculateStackRect(collectionViewWidth)
+        let size = calculateStackSize(collectionViewWidth)
 		let height: CGFloat = size.height + cellConstants.textConstraintsVerticalOffset
         return CGSize(width: collectionViewWidth - cellConstants.cellOffsets, height: height)
 	}
     
     func calculateBubbleSize(collectionViewWidth: CGFloat) -> CGSize {
-        let size = calculateStackRect(collectionViewWidth)
+        let size = calculateStackSize(collectionViewWidth)
         let height: CGFloat = size.height + cellConstants.textConstraintsVerticalOffset
         return CGSize(width: size.width + cellConstants.textConstraintsHorizontalOffset + 1, height: height)
     }
     
-    private func calculateStackRect(_ collectionViewWidth: CGFloat) -> CGSize {
+    private func calculateStackSize(_ collectionViewWidth: CGFloat) -> CGSize {
         let size = CGSize(width: collectionViewWidth - cellConstants.textConstraintsHorizontalOffset - cellConstants.cellOffsets - cellConstants.bubbleSideOffset, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let titleSize = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .medium)], context: nil)
-        let messageSize = NSString(string: message).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .medium)], context: nil)
+        let titleSize = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont(name: "YandexSansText-Medium", size: 15)!], context: nil)
+        let messageSize = NSString(string: message).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont(name: "YandexSansText-Medium", size: 20)!], context: nil)
         let height: CGFloat = titleSize.height + cellConstants.stackLinearOffset + messageSize.height
         return CGSize(width: max(titleSize.width, messageSize.width), height: height)
     }

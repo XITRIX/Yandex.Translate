@@ -98,16 +98,8 @@ class RevercedCollectionViewFlowLayout : UICollectionViewFlowLayout {
         return CGPoint(x: normalPoint.x, y: reversedYforNormalY(normalY: normalPoint.y))
     }
     
-    func normalPointForReversedPoint(reversedPoint: CGPoint) -> CGPoint {
-        return reversedPointForNormalPoint(normalPoint: reversedPoint)
-    }
-    
     func reversedYforNormalY(normalY: CGFloat) -> CGFloat {
         let YreversedAroundContentSizeCenter = collectionViewContentSize.height - normalY
         return YreversedAroundContentSizeCenter
-    }
-    
-    func normalYforReversedY(reversedY: CGFloat) -> CGFloat {
-        return reversedYforNormalY(normalY: reversedY)
     }
 }
