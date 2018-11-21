@@ -76,13 +76,13 @@
 				7C7C9E8821A4560700DE73C0 /* Utils */,
 				7C7C9E8D21A4560700DE73C0 /* ViewControllers */,
 				7C7C9E9121A4560700DE73C0 /* Views */,
+				7C7C9E9C21A5D2A700DE73C0 /* Presenters */,
+				7C7C9E6821A0561100DE73C0 /* MessageViewModel.swift */,
 				7C7C9E5621A03E1900DE73C0 /* AppDelegate.swift */,
-				7C7C9E7821A2210000DE73C0 /* TranslatePresenter.swift */,
 				7C7C9E5A21A03E1900DE73C0 /* Main.storyboard */,
 				7C7C9E5D21A03E1B00DE73C0 /* Assets.xcassets */,
 				7C7C9E5F21A03E1B00DE73C0 /* LaunchScreen.storyboard */,
 				7C7C9E6221A03E1B00DE73C0 /* Info.plist */,
-				7C7C9E6821A0561100DE73C0 /* MessageViewModel.swift */,
 			);
 			path = YandexTranslate;
 			sourceTree = "<group>";
@@ -121,6 +121,14 @@
 				7C7C9E9321A4560700DE73C0 /* BubbleCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7C7C9E9C21A5D2A700DE73C0 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				7C7C9E7821A2210000DE73C0 /* TranslatePresenter.swift */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

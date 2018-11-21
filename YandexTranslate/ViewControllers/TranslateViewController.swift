@@ -31,6 +31,14 @@ class TranslateViewController : UICollectionViewController, TranslateView {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
+    }
+    
     @objc func keyboardDidShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -63,9 +71,9 @@ extension TranslateViewController {
 extension TranslateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let cell = collectionView.cellForItem(at: indexPath) as? BubbleCell {
-            cell.setupConstraints(collectionViewWidth: view.frame.width)
+              cell.setupConstraints(collectionViewWidth: view.safeAreaLayoutGuide.layoutFrame.width)
         }
-        return presenter.getTranslation(at: indexPath.row).calculateCellSize(collectionViewWidth: view.frame.width)
+        return presenter.getTranslation(at: indexPath.row).calculateCellSize(collectionViewWidth: view.safeAreaLayoutGuide.layoutFrame.width)
     }
 }
 

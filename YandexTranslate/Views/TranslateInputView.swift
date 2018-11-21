@@ -59,7 +59,7 @@ class TranslateInputView: UIView {
     }
     
     @IBAction func sendAction(_ sender: UIButton) {
-        if !SpeechRecognition.isRecognising(),
+        if !SpeechRecognition.isRecognising(), // Send text to translate
             let text = textField.text,
             !text.isEmpty {
             delegate?.translate(text) { [weak self = self] lang in
@@ -74,7 +74,7 @@ class TranslateInputView: UIView {
             }
             textField.text = ""
             textFieldEdited(textField)
-        } else {
+        } else { // Send voice to translate
             if !SpeechRecognition.isRecognising() {
                 textField.resignFirstResponder()
                 textField.placeholder = "Говорите..."
