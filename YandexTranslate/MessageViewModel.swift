@@ -12,6 +12,7 @@ struct MessageViewModel {
 	var isLeft: Bool
 	var title: String
 	var message: String
+    var language: TranslateAPI.Language
     
     private enum cellConstants {
         static let bubbleSideOffset: CGFloat = 109

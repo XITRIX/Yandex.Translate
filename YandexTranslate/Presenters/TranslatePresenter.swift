@@ -27,8 +27,9 @@ class TranslatePresenter: TranslateViewPresenter {
     func translate(text: String, from: TranslateAPI.Language, completion: ((TranslateAPI.Language?)->())? = nil) {
         TranslateAPI.translateText(text, from: from, completion: { [weak self] (res, from, to) in
             if let self = self,
-                let res = res {
-                self.translations.insert(MessageViewModel(isLeft: from != TranslateAPI.Language.first, title: text, message: res), at: 0)
+                let res = res,
+                let from = from {
+                self.translations.append(MessageViewModel(isLeft: from != TranslateAPI.Language.first, title: text, message: res, language: from))
                 self.view.handleCollectionUpdate()
                 completion?(from)
             }
