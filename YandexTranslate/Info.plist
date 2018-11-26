@@ -25,6 +25,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Позвольте приложению переводить ваш прекрасный голос, в не менее прекрасный текст</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Позвольте приложению перевести ваш прекрасный голос, в не менее прекрасный текст</string>
 	<key>UIAppFonts</key>
@@ -42,8 +44,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
@@ -53,7 +53,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Позвольте приложению переводить ваш прекрасный голос, в не менее прекрасный текст</string>
 </dict>
 </plist>
